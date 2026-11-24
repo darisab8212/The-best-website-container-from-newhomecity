@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08090e" />
+    <title>dtothea — Beyond Ordinary.</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: #08090e;
+        color: #f5f5fa;
+        font-family: system-ui, sans-serif;
+        overflow-x: hidden;
+      }
+
+      ::selection {
+        background: #c5ff48;
+        color: #08090e;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+
+      #space {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse at 75% 25%, #48319b33, transparent 55%),
+          radial-gradient(ellipse at 10% 80%, #125d5730, transparent 45%);
+        z-index: -2;
+      }
+
+      /* Navigation */
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #08090edb;
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid #ffffff12;
+      }
+
+      nav {
+        max-width: 1240px;
+        margin: auto;
+        padding: 20px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .logo {
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: -2px;
+      }
+
+      .logo span {
+        color: #c5ff48;
+      }
+
+      .links {
+        display: flex;
+        gap: 25px;
+        font-size: 13px;
+        color: #b6b8c7;
+      }
+
+      .links a:hover {
+        color: #c5ff48;
+      }
+
+      .pill {
+        border: 1px solid #ffffff28;
+        border-radius: 100px;
+        padding: 10px 17px;
+        font-size: 12px;
+        background: #ffffff08;
+        color: white;
+      }
+
+      .pill:hover {
+        border-color: #c5ff48;
+      }
+
+      /* Startseite */
+
+      .hero {
+        max-width: 1240px;
+        margin: auto;
+        min-height: 82vh;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+        padding: 80px 5%;
+        gap: 20px;
+      }
+
+      .eyebrow {
+        font: 12px monospace;
+        letter-spacing: 3px;
+        color: #c5ff48;
+        text-transform: uppercase;
+      }
+
+      .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #c5ff48;
+        box-shadow: 0 0 15px #c5ff48;
+        margin-right: 8px;
+        animation: pulse 2s infinite;
+      }
+
+      h1 {
+        font-size: clamp(65px, 10vw, 150px);
+        line-height: 0.85;
+        letter-spacing: -0.09em;
+        margin: 32px 0;
+        font-weight: 900;
+      }
+
+      h1 span {
+        display: block;
+        color: transparent;
+        -webkit-text-stroke: 1px #b7b4d4;
+      }
+
+      p {
+        line-height: 1.7;
+        color: #a6a9bd;
+      }
+
+      .hero p {
+        max-width: 470px;
+        font-size: 18px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 34px;
+      }
+
+      .primary {
+        background: #c5ff48;
+        color: #10130a;
+        font-weight: 800;
+        padding: 16px 24px;
+        border: 0;
+        border-radius: 8px;
+        display: inline-block;
+        transition: 0.2s;
+      }
+
+      .primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 35px #c5ff4833;
+      }
+
+      .secondary {
+        padding: 15px 23px;
+        border: 1px solid #ffffff30;
+        border-radius: 8px;
+        background: #ffffff08;
+        color: white;
+      }
+
+      /* Animierte 3D-Kugel */
+
+      .orb-wrap {
+        position: relative;
+        aspect-ratio: 1;
+        display: grid;
+        place-items: center;
+        perspective: 900px;
+      }
+
+      .orb {
+        position: relative;
+        width: 65%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 30% 25%,
+          #efffd4,
+          #b3ec57 8%,
+          #355b4e 28%,
+          #14162d 55%,
+          #08090e 75%
+        );
+        box-shadow:
+          inset -15px -15px 45px #000,
+          0 0 90px #a2ff4930;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .orb::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent 0 9px,
+          #b5ff7026 10px 11px
+        );
+        mask-image: radial-gradient(black, transparent 75%);
+      }
+
+      .ring {
+        position: absolute;
+        width: 88%;
+        height: 38%;
+        border: 1px solid #c5ff4880;
+        border-radius: 50%;
+        transform: rotate(-35deg);
+        box-shadow: 0 0 20px #c5ff4820;
+        animation: orbit 9s linear infinite;
+      }
+
+      .ring.r2 {
+        border-color: #a48bff80;
+        animation-direction: reverse;
+        animation-duration: 13s;
+      }
+
+      .ring.r3 {
+        width: 98%;
+        height: 98%;
+        border-style: dashed;
+        border-color: #ffffff20;
+        animation: spin 35s linear infinite;
+      }
+
+      .orb-label {
+        position: absolute;
+        bottom: 4%;
+        right: 0;
+        font: 11px monospace;
+        color: #a6a9bd;
+        letter-spacing: 2px;
+      }
+
+      /* Beweglicher Text */
+
+      .ticker {
+        overflow: hidden;
+        border-block: 1px solid #ffffff18;
+        background: #ffffff05;
+        padding: 17px 0;
+      }
+
+      .ticker div {
+        display: flex;
+        width: max-content;
+        animation: scroll 22s linear infinite;
+        gap: 35px;
+        font: 700 13px monospace;
+        letter-spacing: 4px;
+        color: #b6b8c7;
+      }
+
+      .ticker span {
+        color: #c5ff48;
+      }
+
+      /* Inhaltsbereich */
+
+      section.content {
+        max-width: 1240px;
+        margin: auto;
+        padding: 100px 5%;
+      }
+
+      h2 {
+        font-size: clamp(36px, 5vw, 70px);
+        letter-spacing: -0.06em;
+        line-height: 1.05;
+        margin: 15px 0 35px;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .card {
+        position: relative;
+        overflow: hidden;
+        min-height: 260px;
+        background: linear-gradient(145deg, #171927, #0e1018);
+        border: 1px solid #ffffff16;
+        border-radius: 18px;
+        padding: 28px;
+        transition: 0.25s;
+      }
+
+      .card:hover {
+        transform: translateY(-7px);
+        border-color: #c5ff4870;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          350px circle at var(--x, 50%) var(--y, 50%),
+          #c5ff4814,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      .num {
+        font: 12px monospace;
+        color: #c5ff48;
+        letter-spacing: 2px;
+      }
+
+      .symbol {
+        font-size: 48px;
+        margin: 28px 0 10px;
+        color: #c5ff48;
+      }
+
+      .card h3 {
+        font-size: 23px;
+        margin: 0;
+      }
+
+      .card p {
+        font-size: 14px;
+      }
+
+      /* Interaktives Terminal */
+
+      .lab {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .terminal {
+        border: 1px solid #ffffff25;
+        border-radius: 16px;
+        background: #0b0d14;
+        overflow: hidden;
+        box-shadow: 0 20px 80px #0005;
+      }
+
+      .bar {
+        padding: 16px;
+        background: #171a23;
+        display: flex;
+        gap: 7px;
+        align-items: center;
+      }
+
+      .bar i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ff6464;
+      }
+
+      .bar i:nth-child(2) {
+        background: #ffca60;
+      }
+
+      .bar i:nth-child(3) {
+        background: #c5ff48;
+      }
+
+      .bar span {
+        margin-left: auto;
+        color: #9295ab;
+        font: 12px monospace;
+      }
+
+      .screen {
+        padding: 24px;
+        min-height: 240px;
+        max-height: 340px;
+        overflow: auto;
+        font: 13px/1.8 monospace;
+        color: #c5ff48;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .command {
+        display: flex;
+        align-items: center;
+        border-top: 1px solid #ffffff16;
+        padding: 14px 20px;
+        color: #c5ff48;
+        gap: 10px;
+      }
+
+      .command input {
+        background: none;
+        border: 0;
+        outline: none;
+        color: white;
+        font: 14px monospace;
+        width: 100%;
+      }
+
+      .command button {
+        background: transparent;
+        color: #c5ff48;
+        border: 0;
+      }
+
+      /* Statistiken */
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-block: 1px solid #ffffff18;
+        margin-top: 45px;
+      }
+
+      .stat {
+        padding: 24px 10px;
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: clamp(28px, 4vw, 50px);
+        letter-spacing: -2px;
+      }
+
+      .stat small {
+        color: #a6a9bd;
+        font: 11px monospace;
+        letter-spacing: 1px;
+      }
+
+      .contact {
+        text-align: center;
+        background: radial-gradient(
+          ellipse at center,
+          #31245266,
+          transparent 65%
+        );
+      }
+
+      footer {
+        padding: 30px 5%;
+        border-top: 1px solid #ffffff18;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        color: #9295ab;
+        font: 12px monospace;
+      }
+
+      /* Hyperdrive-Modus */
+
+      .boost .orb {
+        filter: hue-rotate(160deg);
+        box-shadow: 0 0 100px #a48bff88;
+      }
+
+      .boost .primary {
+        background: #a48bff;
+      }
+
+      .boost .eyebrow,
+      .boost .num,
+      .boost .symbol {
+        color: #a48bff;
+      }
+
+      /* Animationen */
+
+      @keyframes pulse {
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      @keyframes float {
+        50% {
+          transform: translateY(-18px);
+        }
+      }
+
+      @keyframes orbit {
+        0% {
+          transform: rotate(-35deg) rotateX(0deg);
+        }
+
+        100% {
+          transform: rotate(-35deg) rotateX(360deg);
+        }
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes scroll {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* Smartphone-Anpassung */
+
+      @media (max-width: 760px) {
+        .hero,
+        .lab {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 65px;
+        }
+
+        .orb-wrap {
+          max-width: 360px;
+          width: 100%;
+          margin: auto;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .links {
+          display: none;
+        }
+
+        section.content {
+          padding-block: 65px;
+        }
+
+        footer {
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="space" aria-hidden="true"></canvas>
+
+    <!-- Navigation -->
+
+    <header>
+      <nav>
+        <a class="logo" href="#home"> dtothea<span>.</span> </a>
+
+        <div class="links">
+          <a href="#home">Home</a>
+          <a href="#about">Experience</a>
+          <a href="#lab">Terminal</a>
+        </div>
+
+        <button class="pill" id="mode" aria-pressed="false">
+          ✦ Hyperdrive
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Startseite -->
+
+      <section class="hero" id="home">
+        <div>
+          <div class="eyebrow">
+            <i class="dot"></i>
+            System online / 001
+          </div>
+
+          <h1>
+            dtothea
+            <span>Beyond.</span>
+          </h1>
+
+          <p>
+            Keine gewöhnliche Webseite. Ein digitales Experiment zwischen
+            Technologie, Design und grenzenloser Neugier.
+          </p>
+
+          <div class="actions">
+            <a class="primary" href="#about"> Entdecken ↗ </a>
+
+            <a class="secondary" href="#lab"> Terminal öffnen &gt;_ </a>
+          </div>
+        </div>
+
+        <div class="orb-wrap" aria-hidden="true">
+          <div class="ring r3"></div>
+          <div class="orb"></div>
+          <div class="ring"></div>
+          <div class="ring r2"></div>
+
+          <div class="orb-label">FIG. 01 / DIGITAL CORE</div>
+        </div>
+      </section>
+
+      <!-- Animierter Text -->
+
+      <div class="ticker" aria-hidden="true">
+        <div>
+          DESIGN <span>✦</span> TECHNOLOGY <span>✦</span> DOCKER
+          <span>✦</span> NGINX <span>✦</span> FUTURE <span>✦</span> DESIGN
+          <span>✦</span> TECHNOLOGY <span>✦</span> DOCKER <span>✦</span> NGINX
+          <span>✦</span> FUTURE <span>✦</span>
+        </div>
+      </div>
+
+      <!-- Experience -->
+
+      <section class="content" id="about">
+        <div class="eyebrow">01 / The experience</div>
+
+        <h2>Engineered to stand out.</h2>
+
+        <div class="cards">
+          <article class="card">
+            <div class="num">01 / INFRASTRUCTURE</div>
+            <div class="symbol">⬡</div>
+            <h3>Containerized.</h3>
+            <p>
+              Bereit für den Betrieb in Docker. Eine kompakte, portable Webseite
+              auf Nginx.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="num">02 / INTERFACE</div>
+            <div class="symbol">✳</div>
+            <h3>Designed differently.</h3>
+            <p>
+              Futuristische Oberflächen, dynamische Animationen und responsive
+              Gestaltung.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="num">03 / PERFORMANCE</div>
+            <div class="symbol">↗</div>
+            <h3>Zero dependencies.</h3>
+            <p>
+              HTML, CSS und JavaScript. Keine externen Frameworks und keine
+              zusätzlichen Downloads.
+            </p>
+          </article>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>01</strong>
+            <small>HTML DATEI</small>
+          </div>
+
+          <div class="stat">
+            <strong>00</strong>
+            <small>EXTERNE LIBRARIES</small>
+          </div>
+
+          <div class="stat">
+            <strong>∞</strong>
+            <small>MÖGLICHKEITEN</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Terminal -->
+
+      <section class="content lab" id="lab">
+        <div>
+          <div class="eyebrow">02 / Interactive lab</div>
+
+          <h2>Take control.</h2>
+
+          <p>
+            Teste das interaktive Terminal. Gib <strong>help</strong> ein, um
+            alle verfügbaren Befehle zu sehen.
+          </p>
+
+          <p>
+            Mit <strong>matrix</strong> und <strong>boost</strong> veränderst du
+            die Atmosphäre der Webseite.
+          </p>
+
+          <p>
+            Dies ist eine lokale JavaScript-Simulation, kein Zugriff auf den
+            echten Server.
+          </p>
+        </div>
+
+        <div class="terminal">
+          <div class="bar">
+            <i></i>
+            <i></i>
+            <i></i>
+            <span>dtothea@web:~</span>
+          </div>
+
+          <div class="screen" id="output" role="log" aria-live="polite">
+            DToTheA OS [v1.0] Connection established. Type 'help' to begin.
+          </div>
+
+          <form class="command" id="terminal">
+            <label for="cmd">❯</label>
+
+            <input
+              id="cmd"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Enter command..."
+              aria-label="Terminalbefehl"
+            />
+
+            <button type="submit" aria-label="Befehl ausführen">↵</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Abschluss -->
+
+      <section class="content contact">
+        <div class="eyebrow">03 / End of transmission</div>
+
+        <h2>
+          Stay curious.<br />
+          Never ordinary.
+        </h2>
+
+        <a class="primary" href="#home"> Back to the top ↑ </a>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> dtothea.</span>
+      <span>BUILT WITH HTML · CSS · JS</span>
+      <span>
+        <i class="dot"></i>
+        <span id="clock">ONLINE</span>
+      </span>
+    </footer>
+
+    <!-- JavaScript -->
+
+    <script>
+      const canvas = document.querySelector("#space");
+      const ctx = canvas.getContext("2d");
+
+      let w;
+      let h;
+      let stars = [];
+      let matrix = false;
+      let boost = false;
+
+      const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Sternenhintergrund erstellen
+
+      function resize() {
+        const d = Math.min(devicePixelRatio || 1, 2);
+
+        w = innerWidth;
+        h = innerHeight;
+
+        canvas.width = w * d;
+        canvas.height = h * d;
+
+        ctx.setTransform(d, 0, 0, d, 0, 0);
+
+        stars = Array.from(
+          {
+            length: Math.min(150, Math.floor((w * h) / 7000)),
+          },
+          () => ({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 1.5 + 0.3,
+            v: Math.random() * 0.45 + 0.1,
+          }),
+        );
+      }
+
+      window.addEventListener("resize", () => {
+        resize();
+
+        if (reduced) {
+          draw();
+        }
+      });
+
+      resize();
+
+      // Hintergrund animieren
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (const s of stars) {
+          if (!reduced) {
+            s.y += s.v * (boost ? 7 : 1);
+
+            if (s.y > h) {
+              s.y = 0;
+            }
+          }
+
+          ctx.fillStyle = matrix ? "#c5ff48" : boost ? "#a48bff" : "#909ac8";
+
+          ctx.globalAlpha = 0.55;
+          ctx.beginPath();
+
+          if (matrix) {
+            ctx.font = "12px monospace";
+
+            ctx.fillText(Math.random() > 0.5 ? "1" : "0", s.x, s.y);
+          } else {
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+
+            ctx.fill();
+          }
+        }
+
+        ctx.globalAlpha = 1;
+
+        if (!reduced) {
+          requestAnimationFrame(draw);
+        }
+      }
+
+      draw();
+
+      // Hyperdrive-Modus
+
+      const mode = document.querySelector("#mode");
+
+      function toggleBoost() {
+        boost = !boost;
+
+        document.body.classList.toggle("boost", boost);
+
+        mode.setAttribute("aria-pressed", String(boost));
+
+        mode.textContent = boost ? "✦ Hyperdrive ON" : "✦ Hyperdrive";
+
+        if (reduced) {
+          draw();
+        }
+
+        return "Hyperdrive " + (boost ? "activated." : "disabled.");
+      }
+
+      mode.addEventListener("click", toggleBoost);
+
+      // Interaktive Lichteffekte
+
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+          const rect = card.getBoundingClientRect();
+
+          card.style.setProperty("--x", event.clientX - rect.left + "px");
+
+          card.style.setProperty("--y", event.clientY - rect.top + "px");
+        });
+      });
+
+      // Terminal
+
+      const output = document.querySelector("#output");
+      const input = document.querySelector("#cmd");
+
+      const start = Date.now();
+
+      const commands = {
+        help: () =>
+          "help     - Befehle anzeigen\n" +
+          "about    - Über dtothea\n" +
+          "status   - Systemstatus (Demo)\n" +
+          "date     - Datum und Uhrzeit\n" +
+          "boost    - Hyperdrive umschalten\n" +
+          "matrix   - Matrix-Modus umschalten\n" +
+          "clear    - Terminal leeren",
+
+        about: () =>
+          "dtothea / Beyond ordinary.\n" +
+          "HTML + CSS + JavaScript | Docker-ready.",
+
+        status: () =>
+          "Interface: ONLINE\n" +
+          "Session: " +
+          Math.floor((Date.now() - start) / 1000) +
+          " seconds\n" +
+          "Mode: " +
+          (boost ? "HYPERDRIVE" : "NORMAL") +
+          "\nServer status: not measured (simulation)",
+
+        date: () => new Date().toLocaleString("de-CH"),
+
+        boost: toggleBoost,
+
+        matrix: () => {
+          matrix = !matrix;
+
+          if (reduced) {
+            draw();
+          }
+
+          return "Matrix mode " + (matrix ? "ON" : "OFF");
+        },
+      };
+
+      document
+        .querySelector("#terminal")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const command = input.value.trim().toLowerCase();
+
+          input.value = "";
+
+          if (!command) {
+            return;
+          }
+
+          if (command === "clear") {
+            output.textContent = "";
+            return;
+          }
+
+          output.textContent +=
+            "❯ " +
+            command +
+            "\n" +
+            (Object.hasOwn(commands, command)
+              ? commands[command]()
+              : "Unknown command. Type help.") +
+            "\n\n";
+
+          if (output.textContent.length > 15000) {
+            output.textContent = output.textContent.slice(-12000);
+          }
+
+          output.scrollTop = output.scrollHeight;
+        });
+
+      // Live-Uhr und Jahreszahl
+
+      document.querySelector("#year").textContent = new Date().getFullYear();
+
+      function time() {
+        document.querySelector("#clock").textContent =
+          new Date().toLocaleTimeString("de-CH") + " / ONLINE";
+      }
+
+      time();
+
+      setInterval(time, 1000);
+    </script>
+  </body>
+</html>
