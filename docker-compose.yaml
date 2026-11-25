@@ -1,0 +1,13 @@
+name: dtothea
+
+services:
+  webseite:
+    build: .
+    image: dtothea:2.0
+    ports:
+      - "8092:80"
+
+  webseite-alt:
+    image: dtothea:1.0
+    ports:
+      - "8093:80"

@@ -3,29 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#08090e" />
-    <title>dtothea — Beyond Ordinary.</title>
+    <meta name="theme-color" content="#10100f" />
+
+    <title>dtothea — The Age of Olympus</title>
 
     <style>
+      :root {
+        --bg: #10100f;
+        --panel: #191714;
+        --gold: #d6af69;
+        --light: #f5e9d4;
+        --muted: #b6aa96;
+        --line: #d6af6930;
+        --serif: Georgia, "Times New Roman", serif;
+      }
+
       * {
         box-sizing: border-box;
       }
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 90px;
       }
 
       body {
         margin: 0;
-        background: #08090e;
-        color: #f5f5fa;
-        font-family: system-ui, sans-serif;
-        overflow-x: hidden;
+        background: var(--bg);
+        color: var(--light);
+        font:
+          15px/1.7 system-ui,
+          sans-serif;
+        isolation: isolate;
       }
 
-      ::selection {
-        background: #c5ff48;
-        color: #08090e;
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
       }
 
       a {
@@ -38,777 +52,1423 @@
         cursor: pointer;
       }
 
-      #space {
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 5px;
+      }
+
+      ::selection {
+        background: var(--gold);
+        color: #15100a;
+      }
+
+      #stars {
         position: fixed;
         inset: 0;
         width: 100%;
         height: 100%;
-        pointer-events: none;
         z-index: -1;
+        pointer-events: none;
       }
 
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background:
-          radial-gradient(ellipse at 75% 25%, #48319b33, transparent 55%),
-          radial-gradient(ellipse at 10% 80%, #125d5730, transparent 45%);
-        z-index: -2;
-      }
-
-      /* Navigation */
+      /* NAVIGATION */
 
       header {
         position: sticky;
         top: 0;
         z-index: 10;
-        background: #08090edb;
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid #ffffff12;
+        background: #10100fe8;
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
       }
 
       nav {
-        max-width: 1240px;
+        max-width: 1280px;
         margin: auto;
-        padding: 20px 5%;
+        padding: 16px 5%;
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        gap: 20px;
+        align-items: center;
+        gap: 15px;
       }
 
       .logo {
-        font-size: 25px;
-        font-weight: 900;
-        letter-spacing: -2px;
+        font: 700 27px var(--serif);
+        letter-spacing: -1px;
       }
 
       .logo span {
-        color: #c5ff48;
+        color: var(--gold);
       }
 
-      .links {
+      .navlinks {
         display: flex;
-        gap: 25px;
-        font-size: 13px;
-        color: #b6b8c7;
-      }
-
-      .links a:hover {
-        color: #c5ff48;
-      }
-
-      .pill {
-        border: 1px solid #ffffff28;
-        border-radius: 100px;
-        padding: 10px 17px;
+        gap: 26px;
         font-size: 12px;
-        background: #ffffff08;
-        color: white;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
-      .pill:hover {
-        border-color: #c5ff48;
+      .navlinks a:hover {
+        color: var(--gold);
       }
 
-      /* Startseite */
+      .tag {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .btn {
+        display: inline-block;
+        border: 1px solid var(--gold);
+        background: var(--gold);
+        color: #21180b;
+        padding: 13px 23px;
+        font-size: 12px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        font-weight: 700;
+        transition: 0.25s;
+      }
+
+      .btn:hover {
+        background: #f5d69b;
+        box-shadow: 0 0 35px #d6af6935;
+        transform: translateY(-3px);
+      }
+
+      .ghost {
+        background: transparent;
+        color: var(--gold);
+      }
+
+      .ghost:hover {
+        color: #21180b;
+      }
+
+      /* STARTSEITE */
 
       .hero {
-        max-width: 1240px;
+        max-width: 1280px;
         margin: auto;
-        min-height: 82vh;
+        min-height: min(760px, 90vh);
+        padding: 75px 5% 50px;
         display: grid;
-        grid-template-columns: 1.2fr 1fr;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
-        padding: 80px 5%;
-        gap: 20px;
+        gap: 25px;
       }
 
-      .eyebrow {
-        font: 12px monospace;
-        letter-spacing: 3px;
-        color: #c5ff48;
-        text-transform: uppercase;
+      .hero h1 {
+        font: normal clamp(65px, 9vw, 145px)/0.82 var(--serif);
+        letter-spacing: -0.075em;
+        margin: 28px 0;
       }
 
-      .dot {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #c5ff48;
-        box-shadow: 0 0 15px #c5ff48;
-        margin-right: 8px;
-        animation: pulse 2s infinite;
-      }
-
-      h1 {
-        font-size: clamp(65px, 10vw, 150px);
-        line-height: 0.85;
-        letter-spacing: -0.09em;
-        margin: 32px 0;
-        font-weight: 900;
-      }
-
-      h1 span {
+      .hero h1 em {
         display: block;
-        color: transparent;
-        -webkit-text-stroke: 1px #b7b4d4;
-      }
-
-      p {
-        line-height: 1.7;
-        color: #a6a9bd;
+        color: var(--gold);
+        font-weight: normal;
+        letter-spacing: -0.065em;
       }
 
       .hero p {
-        max-width: 470px;
-        font-size: 18px;
+        max-width: 440px;
+        color: var(--muted);
+        font-size: 17px;
       }
 
       .actions {
         display: flex;
-        gap: 14px;
+        gap: 12px;
         flex-wrap: wrap;
-        margin-top: 34px;
+        margin-top: 30px;
       }
 
-      .primary {
-        background: #c5ff48;
-        color: #10130a;
-        font-weight: 800;
-        padding: 16px 24px;
-        border: 0;
-        border-radius: 8px;
-        display: inline-block;
-        transition: 0.2s;
-      }
+      /* ANIMIERTER TEMPEL */
 
-      .primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 35px #c5ff4833;
-      }
-
-      .secondary {
-        padding: 15px 23px;
-        border: 1px solid #ffffff30;
-        border-radius: 8px;
-        background: #ffffff08;
-        color: white;
-      }
-
-      /* Animierte 3D-Kugel */
-
-      .orb-wrap {
+      .art {
         position: relative;
-        aspect-ratio: 1;
-        display: grid;
-        place-items: center;
-        perspective: 900px;
+        min-width: 0;
       }
 
-      .orb {
-        position: relative;
-        width: 65%;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle at 30% 25%,
-          #efffd4,
-          #b3ec57 8%,
-          #355b4e 28%,
-          #14162d 55%,
-          #08090e 75%
+      .art svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .orbit {
+        transform-origin: 300px 210px;
+        animation: rotate 60s linear infinite;
+      }
+
+      .moon {
+        animation: glow 5s ease-in-out infinite;
+      }
+
+      .temple {
+        animation: float 7s ease-in-out infinite;
+      }
+
+      .art-label {
+        text-align: right;
+        color: var(--muted);
+        font: 10px monospace;
+        letter-spacing: 3px;
+      }
+
+      .meander {
+        height: 19px;
+        border-block: 1px solid var(--line);
+        background: repeating-linear-gradient(
+          90deg,
+          transparent 0 9px,
+          var(--gold) 9px 11px,
+          transparent 11px 19px
         );
-        box-shadow:
-          inset -15px -15px 45px #000,
-          0 0 90px #a2ff4930;
-        animation: float 6s ease-in-out infinite;
+        opacity: 0.45;
+        position: relative;
       }
 
-      .orb::after {
+      .meander:after {
         content: "";
         position: absolute;
-        inset: 0;
-        border-radius: 50%;
+        inset: 4px 0;
+        border-block: 1px solid var(--gold);
         background: repeating-linear-gradient(
-          0deg,
-          transparent 0 9px,
-          #b5ff7026 10px 11px
+          90deg,
+          transparent 0 4px,
+          var(--bg) 4px 15px,
+          transparent 15px 19px
         );
-        mask-image: radial-gradient(black, transparent 75%);
       }
 
-      .ring {
-        position: absolute;
-        width: 88%;
-        height: 38%;
-        border: 1px solid #c5ff4880;
-        border-radius: 50%;
-        transform: rotate(-35deg);
-        box-shadow: 0 0 20px #c5ff4820;
-        animation: orbit 9s linear infinite;
-      }
+      /* INHALTSBEREICHE */
 
-      .ring.r2 {
-        border-color: #a48bff80;
-        animation-direction: reverse;
-        animation-duration: 13s;
-      }
-
-      .ring.r3 {
-        width: 98%;
-        height: 98%;
-        border-style: dashed;
-        border-color: #ffffff20;
-        animation: spin 35s linear infinite;
-      }
-
-      .orb-label {
-        position: absolute;
-        bottom: 4%;
-        right: 0;
-        font: 11px monospace;
-        color: #a6a9bd;
-        letter-spacing: 2px;
-      }
-
-      /* Beweglicher Text */
-
-      .ticker {
-        overflow: hidden;
-        border-block: 1px solid #ffffff18;
-        background: #ffffff05;
-        padding: 17px 0;
-      }
-
-      .ticker div {
-        display: flex;
-        width: max-content;
-        animation: scroll 22s linear infinite;
-        gap: 35px;
-        font: 700 13px monospace;
-        letter-spacing: 4px;
-        color: #b6b8c7;
-      }
-
-      .ticker span {
-        color: #c5ff48;
-      }
-
-      /* Inhaltsbereich */
-
-      section.content {
-        max-width: 1240px;
+      .section {
+        max-width: 1280px;
         margin: auto;
-        padding: 100px 5%;
+        padding: 95px 5%;
       }
 
-      h2 {
-        font-size: clamp(36px, 5vw, 70px);
-        letter-spacing: -0.06em;
-        line-height: 1.05;
-        margin: 15px 0 35px;
+      .section h2 {
+        font: normal clamp(38px, 5.5vw, 76px)/1.05 var(--serif);
+        letter-spacing: -0.045em;
+        margin: 14px 0 18px;
+      }
+
+      .section h2 em {
+        color: var(--gold);
+        font-weight: normal;
+      }
+
+      .intro {
+        max-width: 680px;
+        color: var(--muted);
+        margin-bottom: 36px;
+      }
+
+      /* GÖTTERKARTEN */
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 20px 0 24px;
+      }
+
+      .filter {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--muted);
+        padding: 8px 15px;
+        font-size: 12px;
+      }
+
+      .filter.active {
+        background: var(--gold);
+        color: #21180b;
+        border-color: var(--gold);
       }
 
       .cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 15px;
       }
 
-      .card {
+      .god {
         position: relative;
         overflow: hidden;
-        min-height: 260px;
-        background: linear-gradient(145deg, #171927, #0e1018);
-        border: 1px solid #ffffff16;
-        border-radius: 18px;
-        padding: 28px;
-        transition: 0.25s;
+        text-align: left;
+        min-height: 230px;
+        padding: 24px;
+        background:
+          radial-gradient(
+            ellipse at var(--x, 50%) var(--y, 0%),
+            #d6af6919,
+            transparent 70%
+          ),
+          linear-gradient(145deg, #211d17, #121211);
+        border: 1px solid var(--line);
+        color: var(--light);
+        transition: 0.3s;
       }
 
-      .card:hover {
-        transform: translateY(-7px);
-        border-color: #c5ff4870;
+      .god:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
       }
 
-      .card::before {
-        content: "";
+      .god:before {
+        content: attr(data-greek);
         position: absolute;
-        inset: 0;
-        background: radial-gradient(
-          350px circle at var(--x, 50%) var(--y, 50%),
-          #c5ff4814,
-          transparent 60%
-        );
+        right: 10px;
+        top: -30px;
+        font: 110px var(--serif);
+        color: #d6af6910;
         pointer-events: none;
       }
 
-      .num {
-        font: 12px monospace;
-        color: #c5ff48;
-        letter-spacing: 2px;
+      .god .symbol {
+        display: block;
+        font: 55px var(--serif);
+        color: var(--gold);
+        margin: 12px 0;
       }
 
-      .symbol {
-        font-size: 48px;
-        margin: 28px 0 10px;
-        color: #c5ff48;
-      }
-
-      .card h3 {
-        font-size: 23px;
+      .god h3 {
+        font: normal 33px var(--serif);
         margin: 0;
       }
 
-      .card p {
-        font-size: 14px;
+      .god p {
+        color: var(--muted);
+        margin: 4px 0;
+        font-size: 13px;
       }
 
-      /* Interaktives Terminal */
-
-      .lab {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        align-items: center;
+      .god .more {
+        display: block;
+        color: var(--gold);
+        font-size: 10px;
+        letter-spacing: 2px;
+        margin-top: 17px;
       }
 
-      .terminal {
-        border: 1px solid #ffffff25;
-        border-radius: 16px;
-        background: #0b0d14;
-        overflow: hidden;
-        box-shadow: 0 20px 80px #0005;
-      }
+      /* MYTHOLOGIE */
 
-      .bar {
-        padding: 16px;
-        background: #171a23;
-        display: flex;
-        gap: 7px;
-        align-items: center;
-      }
-
-      .bar i {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #ff6464;
-      }
-
-      .bar i:nth-child(2) {
-        background: #ffca60;
-      }
-
-      .bar i:nth-child(3) {
-        background: #c5ff48;
-      }
-
-      .bar span {
-        margin-left: auto;
-        color: #9295ab;
-        font: 12px monospace;
-      }
-
-      .screen {
-        padding: 24px;
-        min-height: 240px;
-        max-height: 340px;
-        overflow: auto;
-        font: 13px/1.8 monospace;
-        color: #c5ff48;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-      }
-
-      .command {
-        display: flex;
-        align-items: center;
-        border-top: 1px solid #ffffff16;
-        padding: 14px 20px;
-        color: #c5ff48;
-        gap: 10px;
-      }
-
-      .command input {
-        background: none;
-        border: 0;
-        outline: none;
-        color: white;
-        font: 14px monospace;
-        width: 100%;
-      }
-
-      .command button {
-        background: transparent;
-        color: #c5ff48;
-        border: 0;
-      }
-
-      /* Statistiken */
-
-      .stats {
+      .myths {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        border-block: 1px solid #ffffff18;
-        margin-top: 45px;
+        gap: 15px;
       }
 
-      .stat {
-        padding: 24px 10px;
+      .myth {
+        border-top: 1px solid var(--gold);
+        background: linear-gradient(160deg, #d6af690c, transparent);
+        padding: 25px;
+      }
+
+      .myth h3 {
+        font: normal 28px var(--serif);
+        margin: 15px 0;
+      }
+
+      .myth p {
+        color: var(--muted);
+      }
+
+      .textbtn {
+        border: 0;
+        border-bottom: 1px solid var(--gold);
+        padding: 4px 0;
+        background: none;
+        color: var(--gold);
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      /* GESCHICHTE */
+
+      .history {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-top: 40px;
+      }
+
+      .era {
+        border-top: 1px solid var(--gold);
+        padding: 18px 0;
+      }
+
+      .era strong {
+        font: normal 24px var(--serif);
+        color: var(--gold);
+      }
+
+      .era h3 {
+        margin: 8px 0;
+        font-size: 15px;
+      }
+
+      .era p {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* ORAKEL VON DELPHI */
+
+      .oracle {
+        max-width: none;
+        text-align: center;
+        background: radial-gradient(
+          ellipse at center,
+          #60452238,
+          transparent 70%
+        );
+        border-block: 1px solid var(--line);
+      }
+
+      .oracle-inner {
+        max-width: 700px;
+        margin: auto;
+      }
+
+      .eye {
+        font: 80px var(--serif);
+        color: var(--gold);
+        line-height: 1;
+        text-shadow: 0 0 50px #d6af6980;
+        animation: glow 4s infinite;
+      }
+
+      .oracle input {
+        width: min(100%, 430px);
+        padding: 15px;
+        background: #10100f;
+        border: 1px solid var(--line);
+        color: var(--light);
+        font: inherit;
+        margin: 12px 0;
+      }
+
+      .prophecy {
+        min-height: 100px;
+        font: italic 25px/1.5 var(--serif);
+        color: var(--gold);
+        margin: 30px auto 0;
+        max-width: 580px;
+      }
+
+      /* MYTHOLOGIE-QUIZ */
+
+      .quiz {
+        max-width: 760px;
+        margin: auto;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: clamp(20px, 5vw, 50px);
+      }
+
+      .quiz h3 {
+        font: normal 30px var(--serif);
+        margin: 10px 0 20px;
+      }
+
+      .answers {
+        display: grid;
+        gap: 9px;
+      }
+
+      .answer {
+        text-align: left;
+        background: transparent;
+        color: var(--light);
+        border: 1px solid var(--line);
+        padding: 12px 16px;
+      }
+
+      .answer:hover:not(:disabled) {
+        border-color: var(--gold);
+      }
+
+      .answer.correct {
+        background: #31513c;
+        color: #e0ffdb;
+      }
+
+      .answer.wrong {
+        background: #512b29;
+        color: #ffd8cf;
+      }
+
+      .quiz-status {
+        color: var(--muted);
+        min-height: 30px;
+      }
+
+      .quiz .btn {
+        margin-top: 12px;
+      }
+
+      /* ABSCHLUSS */
+
+      .closing {
         text-align: center;
       }
 
-      .stat strong {
-        display: block;
-        font-size: clamp(28px, 4vw, 50px);
-        letter-spacing: -2px;
+      .closing h2 {
+        font-size: clamp(45px, 7vw, 100px);
       }
 
-      .stat small {
-        color: #a6a9bd;
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 24px 5%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: var(--muted);
         font: 11px monospace;
         letter-spacing: 1px;
       }
 
-      .contact {
-        text-align: center;
-        background: radial-gradient(
-          ellipse at center,
-          #31245266,
-          transparent 65%
-        );
+      /* POPUP-FENSTER */
+
+      dialog {
+        width: min(560px, 90vw);
+        max-height: 85vh;
+        overflow: auto;
+        border: 1px solid var(--gold);
+        background: #191714;
+        color: var(--light);
+        padding: 35px;
+        box-shadow: 0 20px 100px #000b;
       }
 
-      footer {
-        padding: 30px 5%;
-        border-top: 1px solid #ffffff18;
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        color: #9295ab;
-        font: 12px monospace;
+      dialog::backdrop {
+        background: #000b;
+        backdrop-filter: blur(6px);
       }
 
-      /* Hyperdrive-Modus */
-
-      .boost .orb {
-        filter: hue-rotate(160deg);
-        box-shadow: 0 0 100px #a48bff88;
+      dialog h2 {
+        font: normal 46px var(--serif);
+        margin: 12px 0;
       }
 
-      .boost .primary {
-        background: #a48bff;
+      dialog p {
+        color: var(--muted);
       }
 
-      .boost .eyebrow,
-      .boost .num,
-      .boost .symbol {
-        color: #a48bff;
+      .close {
+        float: right;
+        background: none;
+        border: 1px solid var(--line);
+        color: var(--gold);
+        font-size: 22px;
+        padding: 0 12px;
       }
 
-      /* Animationen */
+      /* HELIOS-MODUS */
 
-      @keyframes pulse {
-        50% {
-          opacity: 0.4;
-        }
+      .day {
+        --bg: #f2e7d3;
+        --panel: #e9d9be;
+        --light: #282117;
+        --muted: #695b47;
+        --gold: #90601f;
+        --line: #90601f40;
       }
 
-      @keyframes float {
-        50% {
-          transform: translateY(-18px);
-        }
+      .day header {
+        background: #f2e7d3e8;
       }
 
-      @keyframes orbit {
-        0% {
-          transform: rotate(-35deg) rotateX(0deg);
-        }
-
-        100% {
-          transform: rotate(-35deg) rotateX(360deg);
-        }
+      .day .god {
+        background:
+          radial-gradient(ellipse at top, #b7894030, transparent), #e9d9be;
       }
 
-      @keyframes spin {
+      .day .ghost {
+        color: var(--gold);
+      }
+
+      .day dialog {
+        background: var(--panel);
+      }
+
+      .day .oracle input {
+        background: var(--panel);
+        color: var(--light);
+      }
+
+      /* ANIMATIONEN */
+
+      @keyframes rotate {
         to {
           transform: rotate(360deg);
         }
       }
 
-      @keyframes scroll {
-        to {
-          transform: translateX(-50%);
+      @keyframes float {
+        50% {
+          transform: translateY(-9px);
         }
       }
 
-      /* Smartphone-Anpassung */
-
-      @media (max-width: 760px) {
-        .hero,
-        .lab {
-          grid-template-columns: 1fr;
+      @keyframes glow {
+        50% {
+          opacity: 0.65;
         }
+      }
 
+      /* MOBILE ANPASSUNG */
+
+      @media (max-width: 800px) {
         .hero {
+          grid-template-columns: 1fr;
           padding-top: 65px;
+          min-height: auto;
         }
 
-        .orb-wrap {
-          max-width: 360px;
-          width: 100%;
+        .art {
+          max-width: 530px;
           margin: auto;
         }
 
-        .cards {
-          grid-template-columns: 1fr;
+        .cards,
+        .myths {
+          grid-template-columns: repeat(2, 1fr);
         }
 
-        .links {
+        .history {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .navlinks {
           display: none;
         }
 
-        section.content {
+        .section {
           padding-block: 65px;
         }
+      }
 
-        footer {
-          flex-wrap: wrap;
+      @media (max-width: 460px) {
+        .cards,
+        .myths {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+          font-size: 76px;
+        }
+
+        .history {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .logo {
+          font-size: 22px;
         }
       }
 
       @media (prefers-reduced-motion: reduce) {
         *,
-        *::before,
-        *::after {
+        *:before,
+        *:after {
           animation: none !important;
-          scroll-behavior: auto !important;
           transition: none !important;
+          scroll-behavior: auto !important;
         }
       }
     </style>
   </head>
 
   <body>
-    <canvas id="space" aria-hidden="true"></canvas>
+    <canvas id="stars" aria-hidden="true"></canvas>
 
-    <!-- Navigation -->
+    <!-- NAVIGATION -->
 
     <header>
       <nav>
-        <a class="logo" href="#home"> dtothea<span>.</span> </a>
+        <a href="#home" class="logo"> dtothea<span> · Ω</span> </a>
 
-        <div class="links">
-          <a href="#home">Home</a>
-          <a href="#about">Experience</a>
-          <a href="#lab">Terminal</a>
+        <div class="navlinks">
+          <a href="#gods">Götter</a>
+          <a href="#myths">Mythen</a>
+          <a href="#history">Antike</a>
+          <a href="#oracle">Orakel</a>
+          <a href="#quiz">Quiz</a>
         </div>
 
-        <button class="pill" id="mode" aria-pressed="false">
-          ✦ Hyperdrive
+        <button class="btn ghost" id="theme" aria-pressed="false">
+          ☀ Helios
         </button>
       </nav>
     </header>
 
     <main>
-      <!-- Startseite -->
+      <!-- STARTSEITE -->
 
       <section class="hero" id="home">
         <div>
-          <div class="eyebrow">
-            <i class="dot"></i>
-            System online / 001
-          </div>
+          <div class="tag">ΕΛΛΑΣ &nbsp; / &nbsp; The ancient world</div>
 
           <h1>
-            dtothea
-            <span>Beyond.</span>
+            Rise of<br />
+            <em>Olympus.</em>
           </h1>
 
           <p>
-            Keine gewöhnliche Webseite. Ein digitales Experiment zwischen
-            Technologie, Design und grenzenloser Neugier.
+            Betritt die Welt der alten Griechen. Zwischen unsterblichen Göttern,
+            legendären Helden und einer Zivilisation, die unsere Geschichte bis
+            heute prägt.
           </p>
 
           <div class="actions">
-            <a class="primary" href="#about"> Entdecken ↗ </a>
+            <a class="btn" href="#gods"> Den Olymp betreten → </a>
 
-            <a class="secondary" href="#lab"> Terminal öffnen &gt;_ </a>
+            <a class="btn ghost" href="#oracle"> Das Orakel befragen </a>
           </div>
         </div>
 
-        <div class="orb-wrap" aria-hidden="true">
-          <div class="ring r3"></div>
-          <div class="orb"></div>
-          <div class="ring"></div>
-          <div class="ring r2"></div>
+        <!-- SVG TEMPEL -->
 
-          <div class="orb-label">FIG. 01 / DIGITAL CORE</div>
-        </div>
-      </section>
+        <div class="art">
+          <svg
+            viewBox="0 0 600 500"
+            role="img"
+            aria-label="Goldener griechischer Tempel"
+          >
+            <defs>
+              <radialGradient id="halo">
+                <stop stop-color="#e7bb72" stop-opacity=".35" />
+                <stop offset="1" stop-color="#d6af69" stop-opacity="0" />
+              </radialGradient>
 
-      <!-- Animierter Text -->
+              <linearGradient id="stone" x2=".8" y2="1">
+                <stop stop-color="#f7d99e" />
+                <stop offset=".42" stop-color="#c29b5f" />
+                <stop offset="1" stop-color="#6c4e2d" />
+              </linearGradient>
 
-      <div class="ticker" aria-hidden="true">
-        <div>
-          DESIGN <span>✦</span> TECHNOLOGY <span>✦</span> DOCKER
-          <span>✦</span> NGINX <span>✦</span> FUTURE <span>✦</span> DESIGN
-          <span>✦</span> TECHNOLOGY <span>✦</span> DOCKER <span>✦</span> NGINX
-          <span>✦</span> FUTURE <span>✦</span>
-        </div>
-      </div>
+              <linearGradient id="mount" x2="0" y2="1">
+                <stop stop-color="#655039" />
+                <stop offset="1" stop-color="#181612" />
+              </linearGradient>
 
-      <!-- Experience -->
+              <g id="column">
+                <rect x="-5" y="0" width="36" height="8" rx="1" />
 
-      <section class="content" id="about">
-        <div class="eyebrow">01 / The experience</div>
+                <path d="M0 8H26L23 115H3Z" />
 
-        <h2>Engineered to stand out.</h2>
+                <path
+                  d="M6 12L8 111M13 12V111M20 12L18 111"
+                  stroke="#513c26"
+                  stroke-opacity=".6"
+                  fill="none"
+                  stroke-width="1.5"
+                />
 
-        <div class="cards">
-          <article class="card">
-            <div class="num">01 / INFRASTRUCTURE</div>
-            <div class="symbol">⬡</div>
-            <h3>Containerized.</h3>
-            <p>
-              Bereit für den Betrieb in Docker. Eine kompakte, portable Webseite
-              auf Nginx.
-            </p>
-          </article>
+                <rect x="-5" y="115" width="36" height="8" />
+              </g>
+            </defs>
 
-          <article class="card">
-            <div class="num">02 / INTERFACE</div>
-            <div class="symbol">✳</div>
-            <h3>Designed differently.</h3>
-            <p>
-              Futuristische Oberflächen, dynamische Animationen und responsive
-              Gestaltung.
-            </p>
-          </article>
+            <circle cx="300" cy="210" r="245" fill="url(#halo)" />
 
-          <article class="card">
-            <div class="num">03 / PERFORMANCE</div>
-            <div class="symbol">↗</div>
-            <h3>Zero dependencies.</h3>
-            <p>
-              HTML, CSS und JavaScript. Keine externen Frameworks und keine
-              zusätzlichen Downloads.
-            </p>
-          </article>
-        </div>
+            <g fill="none" stroke="#d6af69" opacity=".4">
+              <circle cx="300" cy="210" r="172" />
+              <circle cx="300" cy="210" r="187" stroke-dasharray="1 9" />
+              <circle cx="300" cy="210" r="150" stroke-width=".5" />
+            </g>
 
-        <div class="stats">
-          <div class="stat">
-            <strong>01</strong>
-            <small>HTML DATEI</small>
-          </div>
+            <g class="orbit" fill="#eac78d">
+              <circle cx="300" cy="23" r="5" />
+              <circle cx="487" cy="210" r="3" />
+              <circle cx="300" cy="397" r="4" />
+              <circle cx="113" cy="210" r="3" />
+            </g>
 
-          <div class="stat">
-            <strong>00</strong>
-            <small>EXTERNE LIBRARIES</small>
-          </div>
-
-          <div class="stat">
-            <strong>∞</strong>
-            <small>MÖGLICHKEITEN</small>
-          </div>
-        </div>
-      </section>
-
-      <!-- Terminal -->
-
-      <section class="content lab" id="lab">
-        <div>
-          <div class="eyebrow">02 / Interactive lab</div>
-
-          <h2>Take control.</h2>
-
-          <p>
-            Teste das interaktive Terminal. Gib <strong>help</strong> ein, um
-            alle verfügbaren Befehle zu sehen.
-          </p>
-
-          <p>
-            Mit <strong>matrix</strong> und <strong>boost</strong> veränderst du
-            die Atmosphäre der Webseite.
-          </p>
-
-          <p>
-            Dies ist eine lokale JavaScript-Simulation, kein Zugriff auf den
-            echten Server.
-          </p>
-        </div>
-
-        <div class="terminal">
-          <div class="bar">
-            <i></i>
-            <i></i>
-            <i></i>
-            <span>dtothea@web:~</span>
-          </div>
-
-          <div class="screen" id="output" role="log" aria-live="polite">
-            DToTheA OS [v1.0] Connection established. Type 'help' to begin.
-          </div>
-
-          <form class="command" id="terminal">
-            <label for="cmd">❯</label>
-
-            <input
-              id="cmd"
-              autocomplete="off"
-              spellcheck="false"
-              placeholder="Enter command..."
-              aria-label="Terminalbefehl"
+            <circle
+              class="moon"
+              cx="300"
+              cy="155"
+              r="86"
+              fill="#e7c58a"
+              opacity=".87"
             />
 
-            <button type="submit" aria-label="Befehl ausführen">↵</button>
-          </form>
+            <circle cx="320" cy="143" r="76" fill="#251e15" opacity=".48" />
+
+            <g fill="url(#mount)">
+              <path
+                d="M0 391L93 218 151 304 231 190
+                         300 298 410 172 600 391Z"
+              />
+
+              <path
+                d="M0 410L141 320 225 367 360 275
+                         490 350 600 295V470H0Z"
+                opacity=".75"
+              />
+            </g>
+
+            <g class="temple" fill="url(#stone)">
+              <path
+                d="M137 258L300 151 463 258Z"
+                stroke="#f5d699"
+                stroke-width="2"
+              />
+
+              <path d="M172 248L300 165 428 248Z" fill="#211b14" />
+
+              <circle
+                cx="300"
+                cy="215"
+                r="17"
+                fill="none"
+                stroke="#d6af69"
+                stroke-width="2"
+              />
+
+              <path
+                d="M300 195V235M280 215H320
+                         M286 201L314 229M314 201L286 229"
+                stroke="#d6af69"
+              />
+
+              <rect x="145" y="258" width="310" height="13" />
+
+              <rect x="157" y="271" width="286" height="125" fill="#201a13" />
+
+              <use href="#column" x="164" y="272" />
+              <use href="#column" x="219" y="272" />
+              <use href="#column" x="274" y="272" />
+              <use href="#column" x="329" y="272" />
+              <use href="#column" x="384" y="272" />
+
+              <rect x="145" y="395" width="310" height="9" />
+
+              <rect x="131" y="405" width="338" height="9" />
+
+              <rect x="117" y="415" width="366" height="10" />
+            </g>
+
+            <g fill="#f5d699">
+              <circle cx="91" cy="102" r="2" />
+              <circle cx="504" cy="77" r="2.5" />
+              <circle cx="550" cy="166" r="1.7" />
+              <circle cx="48" cy="194" r="2" />
+            </g>
+
+            <path d="M40 450H560" stroke="#d6af69" opacity=".3" />
+
+            <text
+              x="300"
+              y="480"
+              text-anchor="middle"
+              fill="#d6af69"
+              font-size="12"
+              letter-spacing="6"
+            >
+              Ο Λ Υ Μ Π Ο Σ
+            </text>
+          </svg>
+
+          <div class="art-label">FIG. 01 / OLYMPUS · MYTHISCHER TEMPEL</div>
         </div>
       </section>
 
-      <!-- Abschluss -->
+      <div class="meander" aria-hidden="true"></div>
 
-      <section class="content contact">
-        <div class="eyebrow">03 / End of transmission</div>
+      <!-- GRIECHISCHE GÖTTER -->
 
-        <h2>
-          Stay curious.<br />
-          Never ordinary.
-        </h2>
+      <section class="section" id="gods">
+        <div class="tag">01 / Pantheon</div>
 
-        <a class="primary" href="#home"> Back to the top ↑ </a>
+        <h2>Die Götter des <em>Olymp.</em></h2>
+
+        <p class="intro">
+          Macht, Weisheit, Krieg und Liebe: Entdecke die wichtigsten Gottheiten
+          der griechischen Mythologie. Klicke auf eine Karte, um ihre Geschichte
+          zu lesen.
+        </p>
+
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all" aria-pressed="true">
+            Alle
+          </button>
+
+          <button class="filter" data-filter="olymp" aria-pressed="false">
+            Olymp
+          </button>
+
+          <button class="filter" data-filter="underworld" aria-pressed="false">
+            Unterwelt
+          </button>
+        </div>
+
+        <div class="cards" id="gods-grid"></div>
+      </section>
+
+      <!-- MYTHOLOGISCHE GESCHICHTEN -->
+
+      <section class="section" id="myths">
+        <div class="tag">02 / Legends</div>
+
+        <h2>Geschichten für die <em>Ewigkeit.</em></h2>
+
+        <div class="myths" id="myths-grid"></div>
+      </section>
+
+      <!-- ANTIKES GRIECHENLAND -->
+
+      <section class="section" id="history">
+        <div class="tag">03 / Historical archive</div>
+
+        <h2>Jenseits der <em>Mythen.</em></h2>
+
+        <p class="intro">
+          Das antike Griechenland war keine einheitliche Nation, sondern eine
+          Welt unterschiedlicher Stadtstaaten. Die folgenden Zeiträume sind
+          historische Epochen, keine Ereignisse aus der Mythologie.
+        </p>
+
+        <div class="history">
+          <article class="era">
+            <strong>ca. 1600–1100 v. Chr.</strong>
+            <h3>Mykenische Kultur</h3>
+            <p>
+              Palastzentren, Handel und frühe griechische Schrift in Linear B.
+            </p>
+          </article>
+
+          <article class="era">
+            <strong>ca. 800–480 v. Chr.</strong>
+            <h3>Archaische Zeit</h3>
+            <p>
+              Entstehung der Poleis, Kolonisation und frühe Olympische Spiele.
+            </p>
+          </article>
+
+          <article class="era">
+            <strong>ca. 480–323 v. Chr.</strong>
+            <h3>Klassische Zeit</h3>
+            <p>
+              Athen, Sparta, Philosophie, Theater und die Blüte klassischer
+              Kunst.
+            </p>
+          </article>
+
+          <article class="era">
+            <strong>323–31 v. Chr.</strong>
+            <h3>Hellenismus</h3>
+            <p>Griechisch geprägte Reiche nach Alexander dem Grossen.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ORAKEL VON DELPHI -->
+
+      <section class="section oracle" id="oracle">
+        <div class="oracle-inner">
+          <div class="tag">04 / Delphi</div>
+
+          <div class="eye" aria-hidden="true">◉</div>
+
+          <h2>Das Orakel von <em>Delphi.</em></h2>
+
+          <p>
+            Stelle dem Orakel eine Frage. Seine Antwort ist ein zufällig
+            gewählter, erfundener Denkspruch – inspiriert von der antiken Welt.
+          </p>
+
+          <form id="oracle-form">
+            <input
+              id="question"
+              required
+              maxlength="200"
+              aria-label="Deine Frage an das Orakel"
+              placeholder="Was hält das Schicksal für mich bereit?"
+            />
+
+            <br />
+
+            <button class="btn" type="submit">Das Orakel befragen</button>
+          </form>
+
+          <div class="prophecy" id="prophecy" aria-live="polite">
+            „Erkenne dich selbst.“
+          </div>
+        </div>
+      </section>
+
+      <!-- QUIZ -->
+
+      <section class="section" id="quiz">
+        <div class="tag">05 / Trial of wisdom</div>
+
+        <h2>Die Prüfung der <em>Athene.</em></h2>
+
+        <div class="quiz">
+          <div class="tag" id="progress"></div>
+
+          <h3 id="quiz-question"></h3>
+
+          <div class="answers" id="answers"></div>
+
+          <p class="quiz-status" id="feedback" aria-live="polite"></p>
+
+          <button class="btn" id="next" hidden>Weiter →</button>
+        </div>
+      </section>
+
+      <div class="meander"></div>
+
+      <!-- ABSCHLUSS -->
+
+      <section class="section closing">
+        <div class="tag">ΜΟΛΩΝ ΛΑΒΕ / The ancient world</div>
+
+        <h2>Legends never <em>die.</em></h2>
+
+        <a class="btn ghost" href="#home"> Zurück zum Olymp ↑ </a>
       </section>
     </main>
 
     <footer>
-      <span>© <span id="year"></span> dtothea.</span>
-      <span>BUILT WITH HTML · CSS · JS</span>
       <span>
-        <i class="dot"></i>
-        <span id="clock">ONLINE</span>
+        © <span id="year"></span>
+        dtothea / THE AGE OF OLYMPUS
       </span>
+
+      <span> HTML · CSS · JS / DOCKER READY </span>
+
+      <span id="clock"></span>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- POPUP-FENSTER -->
+
+    <dialog id="detail">
+      <button class="close" aria-label="Schliessen">×</button>
+
+      <div class="tag" id="detail-tag"></div>
+
+      <h2 id="detail-title"></h2>
+
+      <p id="detail-text"></p>
+    </dialog>
+
+    <!-- JAVASCRIPT -->
 
     <script>
-      const canvas = document.querySelector("#space");
-      const ctx = canvas.getContext("2d");
+      const $ = (s) => document.querySelector(s);
+
+      // DATEN DER GRIECHISCHEN GÖTTER
+
+      const gods = [
+        [
+          "Zeus",
+          "ΖΕΥΣ",
+          "ϟ",
+          "Himmel und Donner",
+          "olymp",
+          "Zeus gilt als König der olympischen Götter. Nach dem Sieg über die Titanen wurde er Herrscher des Himmels. Seine Symbole sind Blitz, Adler und Eiche.",
+        ],
+
+        [
+          "Poseidon",
+          "ΠΟΣΕΙΔΩΝ",
+          "♆",
+          "Meer und Erdbeben",
+          "olymp",
+          "Poseidon herrscht über das Meer. Mit seinem Dreizack kann er nach mythologischer Überlieferung Stürme und Erdbeben auslösen. Auch Pferde sind ihm zugeordnet.",
+        ],
+
+        [
+          "Athene",
+          "ΑΘΗΝΑ",
+          "◇",
+          "Weisheit und Strategie",
+          "olymp",
+          "Athene ist die Göttin der Weisheit, des Handwerks und der strategischen Kriegsführung. Der Mythos erzählt, dass sie aus dem Kopf des Zeus geboren wurde. Die Eule und der Ölbaum sind ihre Symbole.",
+        ],
+
+        [
+          "Hades",
+          "ΑΔΗΣ",
+          "♜",
+          "Herr der Unterwelt",
+          "underworld",
+          "Hades regiert das Reich der Toten. Er ist Bruder von Zeus und Poseidon und nicht mit dem Tod selbst gleichzusetzen. Er zählt gewöhnlich nicht zu den zwölf olympischen Göttern.",
+        ],
+
+        [
+          "Ares",
+          "ΑΡΗΣ",
+          "⚔",
+          "Krieg und Kampf",
+          "olymp",
+          "Ares verkörpert die gewaltsame Seite des Krieges. Anders als Athene steht er besonders für die Wucht und das Chaos des Kampfes.",
+        ],
+
+        [
+          "Aphrodite",
+          "ΑΦΡΟΔΙΤΗ",
+          "♡",
+          "Liebe und Schönheit",
+          "olymp",
+          "Aphrodite ist die Göttin der Liebe und Schönheit. In Hesiods Version ihrer Geburt steigt sie aus dem Meeresschaum empor; andere antike Überlieferungen erzählen eine andere Herkunft.",
+        ],
+
+        [
+          "Apollon",
+          "ΑΠΟΛΛΩΝ",
+          "☼",
+          "Musik und Weissagung",
+          "olymp",
+          "Apollon steht für Musik, Heilkunst, Weissagung und weitere Bereiche. Sein berühmtes Heiligtum lag in Delphi, wo die Pythia Orakelsprüche verkündete.",
+        ],
+
+        [
+          "Artemis",
+          "ΑΡΤΕΜΙΣ",
+          "☾",
+          "Jagd und Wildnis",
+          "olymp",
+          "Artemis ist die Zwillingsschwester Apollons und Göttin der Jagd sowie der wilden Natur. Ihre bekannten Attribute sind Bogen und Pfeile.",
+        ],
+
+        [
+          "Persephone",
+          "ΠΕΡΣΕΦΟΝΗ",
+          "✿",
+          "Königin der Unterwelt",
+          "underworld",
+          "Persephone ist die Tochter Demeters und Königin der Unterwelt. Der Mythos ihrer Rückkehr zu Demeter verbindet ihren Aufenthalt in der Unterwelt mit dem Wechsel der Jahreszeiten.",
+        ],
+      ];
+
+      // MYTHOLOGISCHE GESCHICHTEN
+
+      const myths = [
+        [
+          "01 / THE LABYRINTH",
+          "Theseus und der Minotauros",
+          "Ein Held, ein Labyrinth und ein Faden.",
+          "Theseus betritt auf Kreta das Labyrinth des Minotauros. Ariadne gibt ihm einen Faden, mit dessen Hilfe er nach dem Sieg über das Ungeheuer den Ausgang wiederfindet.",
+        ],
+
+        [
+          "02 / THE TITAN",
+          "Prometheus und das Feuer",
+          "Der Diebstahl, der die Menschheit veränderte.",
+          "Prometheus bringt den Menschen das Feuer. Zeus bestraft ihn, indem er ihn an einen Felsen ketten lässt, wo ein Adler täglich seine Leber frisst. Herakles befreit ihn später.",
+        ],
+
+        [
+          "03 / THE ODYSSEY",
+          "Die Reise des Odysseus",
+          "Zehn Jahre auf dem Weg nach Ithaka.",
+          "Nach dem Trojanischen Krieg versucht Odysseus, nach Ithaka zurückzukehren. Auf seiner Reise begegnet er unter anderem dem Kyklopen Polyphem und den Sirenen. Die Odyssee wird Homer zugeschrieben.",
+        ],
+      ];
+
+      // POPUP ÖFFNEN
+
+      function detail(tag, title, body) {
+        $("#detail-tag").textContent = tag;
+        $("#detail-title").textContent = title;
+        $("#detail-text").textContent = body;
+
+        $("#detail").showModal();
+      }
+
+      $(".close").onclick = () => $("#detail").close();
+
+      $("#detail").addEventListener("click", (e) => {
+        if (e.target === $("#detail")) {
+          $("#detail").close();
+        }
+      });
+
+      // GÖTTERKARTEN ERSTELLEN
+
+      function showGods(filter = "all") {
+        $("#gods-grid").replaceChildren();
+
+        gods
+          .filter((g) => filter === "all" || g[4] === filter)
+          .forEach((g) => {
+            const b = document.createElement("button");
+
+            b.className = "god";
+            b.dataset.greek = g[1];
+
+            b.innerHTML = `
+            <span class="tag">${g[1]}</span>
+            <span class="symbol" aria-hidden="true">
+                ${g[2]}
+            </span>
+            <h3>${g[0]}</h3>
+            <p>${g[3]}</p>
+            <span class="more">
+                MYTHOS ENTDECKEN ↗
+            </span>
+        `;
+
+            b.onclick = () => detail(g[1] + " / " + g[3], g[0], g[5]);
+
+            b.onpointermove = (e) => {
+              const r = b.getBoundingClientRect();
+
+              b.style.setProperty("--x", e.clientX - r.left + "px");
+
+              b.style.setProperty("--y", e.clientY - r.top + "px");
+            };
+
+            $("#gods-grid").append(b);
+          });
+      }
+
+      showGods();
+
+      // FILTER
+
+      $("#filters").onclick = (e) => {
+        const b = e.target.closest("button");
+
+        if (!b) return;
+
+        document.querySelectorAll(".filter").forEach((x) => {
+          x.classList.toggle("active", x === b);
+
+          x.setAttribute("aria-pressed", String(x === b));
+        });
+
+        showGods(b.dataset.filter);
+      };
+
+      // MYTHEN ANZEIGEN
+
+      myths.forEach((m) => {
+        const a = document.createElement("article");
+
+        a.className = "myth";
+
+        a.innerHTML = `
+        <div class="tag">${m[0]}</div>
+        <h3>${m[1]}</h3>
+        <p>${m[2]}</p>
+        <button class="textbtn">
+            Legende lesen →
+        </button>
+    `;
+
+        a.querySelector("button").onclick = () => detail(m[0], m[1], m[3]);
+
+        $("#myths-grid").append(a);
+      });
+
+      // ORAKEL
+
+      const prophecies = [
+        "Auch der längste Weg beginnt mit einer Entscheidung.",
+
+        "Wer nur den Sieg sucht, übersieht die Lektion.",
+
+        "Die Wellen des Poseidon gehorchen nicht deinem Willen, doch du kannst dein Segel setzen.",
+
+        "Athene schenkt Weisheit denen, die ihre Zweifel prüfen.",
+
+        "Nicht jedes verschlossene Tor ist ein verlorener Weg.",
+
+        "Das Feuer des Prometheus erinnert dich daran, Wissen zu teilen.",
+      ];
+
+      let last = -1;
+
+      $("#oracle-form").onsubmit = (e) => {
+        e.preventDefault();
+
+        let n;
+
+        do {
+          n = Math.floor(Math.random() * prophecies.length);
+        } while (n === last);
+
+        last = n;
+
+        $("#prophecy").textContent = "„" + prophecies[n] + "“";
+      };
+
+      // QUIZ-FRAGEN
+
+      const questions = [
+        [
+          "Wer ist der König der olympischen Götter?",
+          ["Hades", "Zeus", "Apollon"],
+          1,
+        ],
+
+        [
+          "Welche Göttin steht für Weisheit?",
+          ["Athene", "Artemis", "Aphrodite"],
+          0,
+        ],
+
+        [
+          "Wer brachte den Menschen das Feuer?",
+          ["Ares", "Odysseus", "Prometheus"],
+          2,
+        ],
+
+        [
+          "Wo befand sich das berühmte Orakel?",
+          ["Delphi", "Sparta", "Ithaka"],
+          0,
+        ],
+
+        [
+          "Wer half Theseus mit einem Faden?",
+          ["Persephone", "Ariadne", "Athene"],
+          1,
+        ],
+      ];
+
+      let qi = 0;
+      let score = 0;
+
+      function quiz() {
+        const q = questions[qi];
+
+        $("#progress").textContent =
+          `FRAGE ${qi + 1} / ${questions.length} · ${score} PUNKTE`;
+
+        $("#quiz-question").textContent = q[0];
+
+        $("#answers").replaceChildren();
+
+        $("#feedback").textContent = "";
+
+        $("#next").hidden = true;
+
+        q[1].forEach((a, i) => {
+          const b = document.createElement("button");
+
+          b.className = "answer";
+
+          b.textContent = a;
+
+          b.onclick = () => {
+            if (i === q[2]) {
+              score++;
+            }
+
+            [...$("#answers").children].forEach((el, j) => {
+              el.disabled = true;
+
+              if (j === q[2]) {
+                el.classList.add("correct");
+              } else if (j === i) {
+                el.classList.add("wrong");
+              }
+            });
+
+            $("#feedback").textContent =
+              i === q[2]
+                ? "Richtig! Athene wäre stolz."
+                : "Richtig wäre: " + q[1][q[2]];
+
+            $("#next").hidden = false;
+
+            $("#next").textContent =
+              qi === questions.length - 1 ? "Ergebnis ansehen →" : "Weiter →";
+          };
+
+          $("#answers").append(b);
+        });
+      }
+
+      quiz();
+
+      // NÄCHSTE FRAGE
+
+      $("#next").onclick = () => {
+        if (qi === questions.length) {
+          qi = 0;
+          score = 0;
+
+          quiz();
+
+          return;
+        }
+
+        qi++;
+
+        if (qi < questions.length) {
+          quiz();
+
+          return;
+        }
+
+        $("#progress").textContent = "PRÜFUNG BEENDET";
+
+        $("#quiz-question").textContent =
+          `${score} von ${questions.length} Punkten`;
+
+        $("#answers").replaceChildren();
+
+        $("#feedback").textContent =
+          score === questions.length
+            ? "Die Weisheit des Olymp ist mit dir."
+            : "Wiederhole die Prüfung und entdecke die Mythen.";
+
+        $("#next").textContent = "Erneut spielen";
+      };
+
+      // HELIOS UND NYX MODUS
+
+      $("#theme").onclick = () => {
+        const day = document.body.classList.toggle("day");
+
+        $("#theme").textContent = day ? "☾ Nyx" : "☀ Helios";
+
+        $("#theme").setAttribute("aria-pressed", String(day));
+      };
+
+      // LIVE-UHR
+
+      $("#year").textContent = new Date().getFullYear();
+
+      function clock() {
+        $("#clock").textContent =
+          new Date().toLocaleTimeString("de-CH") + " / OLYMPUS";
+      }
+
+      clock();
+
+      setInterval(clock, 1000);
+
+      // ANIMIERTER STERNENHIMMEL
+
+      const c = $("#stars");
+      const ctx = c.getContext("2d");
+
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       let w;
       let h;
       let stars = [];
-      let matrix = false;
-      let boost = false;
-
-      const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      // Sternenhintergrund erstellen
 
       function resize() {
         const d = Math.min(devicePixelRatio || 1, 2);
@@ -816,198 +1476,58 @@
         w = innerWidth;
         h = innerHeight;
 
-        canvas.width = w * d;
-        canvas.height = h * d;
+        c.width = w * d;
+        c.height = h * d;
 
         ctx.setTransform(d, 0, 0, d, 0, 0);
 
-        stars = Array.from(
-          {
-            length: Math.min(150, Math.floor((w * h) / 7000)),
-          },
-          () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 1.5 + 0.3,
-            v: Math.random() * 0.45 + 0.1,
-          }),
-        );
+        stars = Array.from({ length: 110 }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.4 + 0.3,
+          v: Math.random() * 0.22 + 0.06,
+        }));
       }
 
-      window.addEventListener("resize", () => {
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        ctx.fillStyle = "#d6af69";
+        ctx.globalAlpha = 0.42;
+
+        for (const s of stars) {
+          if (!reduce) {
+            s.y -= s.v;
+
+            if (s.y < 0) {
+              s.y = h;
+            }
+          }
+
+          ctx.beginPath();
+
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+
+          ctx.fill();
+        }
+
+        ctx.globalAlpha = 1;
+
+        if (!reduce) {
+          requestAnimationFrame(draw);
+        }
+      }
+
+      addEventListener("resize", () => {
         resize();
 
-        if (reduced) {
+        if (reduce) {
           draw();
         }
       });
 
       resize();
-
-      // Hintergrund animieren
-
-      function draw() {
-        ctx.clearRect(0, 0, w, h);
-
-        for (const s of stars) {
-          if (!reduced) {
-            s.y += s.v * (boost ? 7 : 1);
-
-            if (s.y > h) {
-              s.y = 0;
-            }
-          }
-
-          ctx.fillStyle = matrix ? "#c5ff48" : boost ? "#a48bff" : "#909ac8";
-
-          ctx.globalAlpha = 0.55;
-          ctx.beginPath();
-
-          if (matrix) {
-            ctx.font = "12px monospace";
-
-            ctx.fillText(Math.random() > 0.5 ? "1" : "0", s.x, s.y);
-          } else {
-            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-
-            ctx.fill();
-          }
-        }
-
-        ctx.globalAlpha = 1;
-
-        if (!reduced) {
-          requestAnimationFrame(draw);
-        }
-      }
-
       draw();
-
-      // Hyperdrive-Modus
-
-      const mode = document.querySelector("#mode");
-
-      function toggleBoost() {
-        boost = !boost;
-
-        document.body.classList.toggle("boost", boost);
-
-        mode.setAttribute("aria-pressed", String(boost));
-
-        mode.textContent = boost ? "✦ Hyperdrive ON" : "✦ Hyperdrive";
-
-        if (reduced) {
-          draw();
-        }
-
-        return "Hyperdrive " + (boost ? "activated." : "disabled.");
-      }
-
-      mode.addEventListener("click", toggleBoost);
-
-      // Interaktive Lichteffekte
-
-      document.querySelectorAll(".card").forEach((card) => {
-        card.addEventListener("pointermove", (event) => {
-          const rect = card.getBoundingClientRect();
-
-          card.style.setProperty("--x", event.clientX - rect.left + "px");
-
-          card.style.setProperty("--y", event.clientY - rect.top + "px");
-        });
-      });
-
-      // Terminal
-
-      const output = document.querySelector("#output");
-      const input = document.querySelector("#cmd");
-
-      const start = Date.now();
-
-      const commands = {
-        help: () =>
-          "help     - Befehle anzeigen\n" +
-          "about    - Über dtothea\n" +
-          "status   - Systemstatus (Demo)\n" +
-          "date     - Datum und Uhrzeit\n" +
-          "boost    - Hyperdrive umschalten\n" +
-          "matrix   - Matrix-Modus umschalten\n" +
-          "clear    - Terminal leeren",
-
-        about: () =>
-          "dtothea / Beyond ordinary.\n" +
-          "HTML + CSS + JavaScript | Docker-ready.",
-
-        status: () =>
-          "Interface: ONLINE\n" +
-          "Session: " +
-          Math.floor((Date.now() - start) / 1000) +
-          " seconds\n" +
-          "Mode: " +
-          (boost ? "HYPERDRIVE" : "NORMAL") +
-          "\nServer status: not measured (simulation)",
-
-        date: () => new Date().toLocaleString("de-CH"),
-
-        boost: toggleBoost,
-
-        matrix: () => {
-          matrix = !matrix;
-
-          if (reduced) {
-            draw();
-          }
-
-          return "Matrix mode " + (matrix ? "ON" : "OFF");
-        },
-      };
-
-      document
-        .querySelector("#terminal")
-        .addEventListener("submit", (event) => {
-          event.preventDefault();
-
-          const command = input.value.trim().toLowerCase();
-
-          input.value = "";
-
-          if (!command) {
-            return;
-          }
-
-          if (command === "clear") {
-            output.textContent = "";
-            return;
-          }
-
-          output.textContent +=
-            "❯ " +
-            command +
-            "\n" +
-            (Object.hasOwn(commands, command)
-              ? commands[command]()
-              : "Unknown command. Type help.") +
-            "\n\n";
-
-          if (output.textContent.length > 15000) {
-            output.textContent = output.textContent.slice(-12000);
-          }
-
-          output.scrollTop = output.scrollHeight;
-        });
-
-      // Live-Uhr und Jahreszahl
-
-      document.querySelector("#year").textContent = new Date().getFullYear();
-
-      function time() {
-        document.querySelector("#clock").textContent =
-          new Date().toLocaleTimeString("de-CH") + " / ONLINE";
-      }
-
-      time();
-
-      setInterval(time, 1000);
     </script>
   </body>
 </html>
